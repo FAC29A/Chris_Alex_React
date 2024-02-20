@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from 'uuid'
 import MyForm from './components/MyForm'
 import TaskList from './components/TaskList'
 import Filter from './components/Filter'
+import Filter2 from './components/Filter2'
 import { Task } from './components/TaskList'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
 			description: 'React',
 			length: 60,
 			category: 'Study',
+			priority: 'high',
 			finished: false,
 		},
 		{
@@ -27,6 +29,7 @@ function App() {
 			description: 'Work a bit',
 			length: 60,
 			category: 'Work',
+			priority: 'low',
 			finished: false,
 		},
 		{
@@ -34,6 +37,7 @@ function App() {
 			description: 'Walk the dog',
 			length: 120,
 			category: 'Extra',
+			priority: 'medium',
 			finished: false,
 		},
 	])
@@ -43,6 +47,8 @@ function App() {
 	const visibleTasks = selectedCategory
 		? tasks.filter((task) => task.category === selectedCategory)
 		: tasks
+
+
 
 	const toggleFinished = (id: number) => {
 		const updatedTasks = tasks.map((task) => {

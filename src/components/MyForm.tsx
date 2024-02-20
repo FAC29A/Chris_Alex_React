@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import categories from './categories'
+import priorities from './priorities'
 
 // validation rules
 const schema = z.object({
@@ -15,6 +16,10 @@ const schema = z.object({
 	category: z.enum(categories, {
 		errorMap: () => ({ message: 'Category is required' }),
 	}),
+	priority: z.enum(priorities, {
+		errorMap: () => ({ message: 'Priority is required' }),
+	}),
+
 	finished: z.boolean().optional().nullable(),
 })
 
@@ -82,6 +87,23 @@ const MyForm = ({ onSubmit }: Props) => {
 				</select>
 				{errors.category && (
 					<p className='text-danger'>{errors.category.message}</p>
+				)}
+			</div>
+
+			<div className='mb-3'>
+				<label htmlFor='priority' className='form-label'>
+				Priority
+				</label>
+				<select {...register('priority')} id='priority' className='form-select'>
+					<option value=''></option>
+					{priorities.map((priority) => (
+						<option key={priority} value={priority}>
+							{priority}
+						</option>
+					))}
+				</select>
+				{errors.priority && (
+					<p className='text-danger'>{errors.priority.message}</p>
 				)}
 			</div>
 
