@@ -20,12 +20,18 @@ const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
 	if (tasks.length === 0) return null
 
 	return (
-		<table className='table  align-middle '>
+		<table className='table  align-middle text-center'>
 			<thead>
 				<tr className={'text-center table-secondary'}>
-					<th onClick={() => sortBy('description')}>Description</th>
-					<th onClick={() => sortBy('length')}>Length (min)</th>
-					<th onClick={() => sortBy('category')}>Category</th>
+					<th role='button' onClick={() => sortBy('description')}>
+						Description
+					</th>
+					<th role='button' onClick={() => sortBy('length')}>
+						Length (min)
+					</th>
+					<th role='button' onClick={() => sortBy('category')}>
+						Category
+					</th>
 					<th>Finished</th>
 					<th>Delete</th>
 				</tr>
@@ -34,12 +40,12 @@ const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
 				{tasks.map((task) => (
 					<tr
 						key={task.id}
-						className={`text-center ${task.finished ? 'table-success' : ''}`}
+						className={`${task.finished ? 'table-success' : ''}`}
 					>
 						<td>{task.description}</td>
 						<td>{task.length}</td>
 						<td>{task.category}</td>
-						<td className={'text-center'}>
+						<td>
 							<button
 								onClick={() => onFinished(task.id)}
 								className='btn align-middle '
@@ -52,7 +58,7 @@ const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
 								/>
 							</button>
 						</td>
-						<td className={'text-center'}>
+						<td>
 							<button
 								onClick={() => onDelete(task.id)}
 								className='btn btn-danger '
@@ -69,7 +75,7 @@ const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
 				))}
 			</tbody>
 			<tfoot>
-				<tr>
+				<tr className='table-secondary'>
 					<td>Total Length</td>
 					<td>
 						{tasks
@@ -77,8 +83,9 @@ const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
 								(acc, task) => (!task.finished ? acc + task.length : acc),
 								0
 							)
-							.toFixed(2)}
+							.toFixed(2) + ' min'}
 					</td>
+					<td></td>
 					<td></td>
 					<td></td>
 				</tr>
