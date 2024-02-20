@@ -6,6 +6,7 @@ export interface Task {
 	description: string
 	length: number
 	category: string
+	priority: string
 	finished: boolean
 }
 
@@ -32,6 +33,9 @@ const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
 					<th role='button' onClick={() => sortBy('category')}>
 						Category
 					</th>
+					<th role='button' onClick={() => sortBy('priority')}>
+						Priority
+					</th>
 					<th>Finished</th>
 					<th>Delete</th>
 				</tr>
@@ -45,6 +49,7 @@ const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
 						<td>{task.description}</td>
 						<td>{task.length}</td>
 						<td>{task.category}</td>
+						<td>{task.priority}</td>
 						<td>
 							<button
 								onClick={() => onFinished(task.id)}
