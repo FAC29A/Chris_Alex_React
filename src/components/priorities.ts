@@ -1,3 +1,3 @@
-const priorities = ['OMG now!', 'high', 'medium', 'low', 'stretch goal'] as const
+const priorities = ['Urgent!', 'High', 'Medium', 'Low', 'meh..'] as const
 
 export default priorities

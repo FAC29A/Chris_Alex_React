@@ -21,7 +21,7 @@ function App() {
 			description: 'React',
 			length: 60,
 			category: 'Study',
-			priority: 'high',
+			priority: 'High',
 			finished: false,
 		},
 		{
@@ -29,7 +29,7 @@ function App() {
 			description: 'Work a bit',
 			length: 60,
 			category: 'Work',
-			priority: 'low',
+			priority: 'Low',
 			finished: false,
 		},
 		{
@@ -37,7 +37,7 @@ function App() {
 			description: 'Walk the dog',
 			length: 120,
 			category: 'Extra',
-			priority: 'medium',
+			priority: 'Medium',
 			finished: false,
 		},
 	])
