@@ -39,13 +39,13 @@ const MyForm = ({ onSubmit }: Props) => {
 	} = useForm<FormData>({ resolver: zodResolver(schema), mode: 'onChange' })
 
 	return (
-		<form
+		<form className='white'
 			onSubmit={handleSubmit((data) => {
 				onSubmit(data)
 				reset()
 			})}
 		>
-			<div className='mb-3'>
+			<div className='mb-3 white'>
 				<label htmlFor='description' className='form-label'>
 					Description
 				</label>
@@ -73,6 +73,7 @@ const MyForm = ({ onSubmit }: Props) => {
 					<p className='text-danger'>{errors.length.message}</p>
 				)}
 			</div>
+			<div className = 'flexContainer'>
 			<div className='mb-3'>
 				<label htmlFor='category' className='form-label'>
 					Category
@@ -105,6 +106,7 @@ const MyForm = ({ onSubmit }: Props) => {
 				{errors.priority && (
 					<p className='text-danger'>{errors.priority.message}</p>
 				)}
+			</div>
 			</div>
 
 			<button disabled={!isValid} className='btn btn-primary' type='submit'>

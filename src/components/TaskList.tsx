@@ -18,8 +18,6 @@ interface Props {
 }
 
 const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
-	if (tasks.length === 0) return null
-
 	return (
 		<table className='table  align-middle text-center'>
 			<thead>
@@ -90,6 +88,7 @@ const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
 							)
 							.toFixed(2) + ' min'}
 					</td>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
