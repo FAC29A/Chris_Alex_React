@@ -1,11 +1,14 @@
 body {
 	padding: 20px;
+	max-width: min(60rem, 80%);
+	margin-left: auto; /* Centers the content horizontally */
+	margin-right: auto; /* Centers the content horizontally */
 }
 .flexContainer {
 	display: flex;
-	gap: 2rem;
+	gap: 3rem;
 }
 
 .width100 {
-	width: auto !important
+	width: auto !important;
 }

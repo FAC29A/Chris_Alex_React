@@ -46,6 +46,9 @@ function App() {
 	const [selectedCategory, setSelectedCategory] = useState('')
 	const [selectedPriority, setSelectedPriority] = useState('')
 
+	// To keep track of an editing
+	const [editingTask, setEditingTask] = useState<Task | null>(null)
+
 	// const visibleTasks = selectedCategory
 	// 	? tasks.filter((task) => task.category === selectedCategory)
 	// 	: tasks
