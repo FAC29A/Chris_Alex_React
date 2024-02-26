@@ -112,12 +112,16 @@ function App() {
 
       <div className="mb-3">
         <h2 className="mb-3">Your tasks</h2>
+        <div className='flexContainer'>
         <Filter
           onSelectCategory={(category) => setSelectedCategory(category)}
+          onSelectPriority={(priority) => setSelectedPriority(priority)}
         ></Filter>
         <Filter2
           onSelectPriority={(priority) => setSelectedPriority(priority)}
+          onSelectCategory={(category) => setSelectedCategory(category)}
         ></Filter2>
+        </div>
       </div>
       <TaskList
         tasks={visibleTasks()} 

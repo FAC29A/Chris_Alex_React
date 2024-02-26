@@ -93,6 +93,7 @@ const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
 					<td></td>
 					<td></td>
 					<td></td>
+					<td></td>
 				</tr>
 			</tfoot>
 		</table>
