@@ -18,7 +18,7 @@ interface Props {
 }
 
 const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
-	if (tasks.length === 0) return null
+	//if (tasks.length === 0) return null
 
 	return (
 		<table className='table  align-middle text-center'>
