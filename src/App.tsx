@@ -105,7 +105,7 @@ function App() {
 	return (
 		<>
 			<div className='mb-5'>
-				<h2 className='mb-3'>Create task</h2>
+				<h2 className='mb-3 white'>Create task</h2>
 				<MyForm
 					onSubmit={(task) =>
 						setTasks([
@@ -117,7 +117,7 @@ function App() {
 			</div>
 
 			<div className='mb-3'>
-				<h2 className='mb-3'>Your tasks</h2>
+				<h2 className='mb-3 white'>Your tasks</h2>
 				<div className='flexContainer'>
 					<div className='flexContainer'>
 						<GenericFilter

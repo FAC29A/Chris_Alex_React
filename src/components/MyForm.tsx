@@ -39,13 +39,13 @@ const MyForm = ({ onSubmit }: Props) => {
 	} = useForm<FormData>({ resolver: zodResolver(schema), mode: 'onChange' })
 
 	return (
-		<form
+		<form className='white'
 			onSubmit={handleSubmit((data) => {
 				onSubmit(data)
 				reset()
 			})}
 		>
-			<div className='mb-3'>
+			<div className='mb-3 white'>
 				<label htmlFor='description' className='form-label'>
 					Description
 				</label>

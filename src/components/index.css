@@ -1,8 +1,11 @@
 body {
 	padding: 20px;
 	max-width: min(60rem, 80%);
-	margin-left: auto; /* Centers the content horizontally */
-	margin-right: auto; /* Centers the content horizontally */
+	margin-left: auto;
+	margin-right: auto; 
+	background-image: url('../../public/background2.webp');
+	background-repeat: repeat;
+	background-size:contain ;
 }
 .flexContainer {
 	display: flex;
@@ -11,4 +14,8 @@ body {
 
 .width100 {
 	width: auto !important;
+}
+
+.white {
+	color: aliceblue;
 }
