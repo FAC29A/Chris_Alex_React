@@ -16,6 +16,7 @@ import priorities from './components/priorities'
 import { Task } from './components/TaskList'
 import { createTask, getTasks, deleteTask, editTask } from '../model/tasks'
 
+
 function App() {
 	const [tasks, setTasks] = useState([
 		{
