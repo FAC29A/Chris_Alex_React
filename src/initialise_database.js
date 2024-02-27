@@ -1,4 +1,4 @@
-import createTask from '../model/tasks'
+import {createTask} from '../model/tasks.js'
 
 const initial_Tasks = [{
     description: 'React',
