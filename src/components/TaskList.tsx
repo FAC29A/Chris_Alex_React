@@ -1,5 +1,5 @@
 import { FaCheckCircle } from 'react-icons/fa'
-import { MdDeleteForever } from 'react-icons/md'
+import { MdDeleteForever, MdEdit } from 'react-icons/md'
 
 export interface Task {
 	id: number
@@ -12,12 +12,13 @@ export interface Task {
 
 interface Props {
 	tasks: Task[]
+	onEdit: (id: number, description: string) => void
 	onDelete: (id: number) => void
 	onFinished: (id: number) => void
 	sortBy: (sortField: string) => void
 }
 
-const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
+const TaskList = ({ tasks, onDelete, onFinished, sortBy, onEdit }: Props) => {
 	return (
 		<table className='table  align-middle text-center'>
 			<thead>
@@ -35,6 +36,7 @@ const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
 						Priority
 					</th>
 					<th>Finished</th>
+					<th>Edit</th>
 					<th>Delete</th>
 				</tr>
 			</thead>
@@ -56,6 +58,19 @@ const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
 								<FaCheckCircle
 									style={{
 										color: task.finished ? 'green' : 'grey',
+										fontSize: '20px',
+									}}
+								/>
+							</button>
+						</td>
+						<td>
+							<button
+								onClick={() => onEdit(task.id, task.description)}
+								className='btn btn-danger '
+							>
+								<MdEdit
+									style={{
+										color: 'white',
 										fontSize: '20px',
 									}}
 								/>
@@ -88,6 +103,7 @@ const TaskList = ({ tasks, onDelete, onFinished, sortBy }: Props) => {
 							)
 							.toFixed(2) + ' min'}
 					</td>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>

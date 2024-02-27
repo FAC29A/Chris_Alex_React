@@ -54,6 +54,7 @@ const MyForm = ({ onSubmit }: Props) => {
 					id='description'
 					type='text'
 					className='form-control'
+					value={''}
 				></input>
 				{errors.description && (
 					<p className='text-danger'>{errors.description.message}</p>
