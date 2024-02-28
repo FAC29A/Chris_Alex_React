@@ -1,11 +1,4 @@
-//import ListGroup from "./components/ListGroup"
-// import Alert from './components/Alert'
-// import Button from './components/Button'
-// import { LuAperture } from 'react-icons/lu'
-// import Like from './components/Like'
-// import ExpandableText from './components/ExpandableText'
-// import ExpandableButton from './components/ExpandableButton'
-//import Form from './components/Form'
+
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import MyForm from './components/MyForm'
@@ -14,7 +7,9 @@ import GenericFilter from './components/GenericFilter'
 import categories from './components/categories'
 import priorities from './components/priorities'
 import { Task } from './components/TaskList'
-import { createTask, getTasks, deleteTask, editTask } from '../model/tasks'
+import { createTask, getTasks, deleteTask, editTask } from '../model/tasksFunctions'
+
+
 
 
 function App() {
@@ -48,8 +43,6 @@ function App() {
 	const [selectedCategory, setSelectedCategory] = useState('')
 	const [selectedPriority, setSelectedPriority] = useState('')
 
-	// To keep track of an editing
-	const [editingTask, setEditingTask] = useState<Task | null>(null)
 
 	//combining two ternary logics into a single function 
 	const visibleTasks = () => {

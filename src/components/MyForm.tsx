@@ -39,7 +39,8 @@ const MyForm = ({ onSubmit }: Props) => {
 	} = useForm<FormData>({ resolver: zodResolver(schema), mode: 'onChange' })
 
 	return (
-		<form className='white'
+		<form
+			className='white'
 			onSubmit={handleSubmit((data) => {
 				onSubmit(data)
 				reset()
@@ -54,7 +55,6 @@ const MyForm = ({ onSubmit }: Props) => {
 					id='description'
 					type='text'
 					className='form-control'
-					value={''}
 				></input>
 				{errors.description && (
 					<p className='text-danger'>{errors.description.message}</p>
@@ -74,40 +74,48 @@ const MyForm = ({ onSubmit }: Props) => {
 					<p className='text-danger'>{errors.length.message}</p>
 				)}
 			</div>
-			<div className = 'flexContainer'>
-			<div className='mb-3'>
-				<label htmlFor='category' className='form-label'>
-					Category
-				</label>
-				<select {...register('category')} id='category' className='form-select'>
-					<option value=''></option>
-					{categories.map((category) => (
-						<option key={category} value={category}>
-							{category}
-						</option>
-					))}
-				</select>
-				{errors.category && (
-					<p className='text-danger'>{errors.category.message}</p>
-				)}
-			</div>
+			<div className='flexContainer'>
+				<div className='mb-3'>
+					<label htmlFor='category' className='form-label'>
+						Category
+					</label>
+					<select
+						{...register('category')}
+						id='category'
+						className='form-select'
+					>
+						<option value=''></option>
+						{categories.map((category) => (
+							<option key={category} value={category}>
+								{category}
+							</option>
+						))}
+					</select>
+					{errors.category && (
+						<p className='text-danger'>{errors.category.message}</p>
+					)}
+				</div>
 
-			<div className='mb-3'>
-				<label htmlFor='priority' className='form-label'>
-				Priority
-				</label>
-				<select {...register('priority')} id='priority' className='form-select'>
-					<option value=''></option>
-					{priorities.map((priority) => (
-						<option key={priority} value={priority}>
-							{priority}
-						</option>
-					))}
-				</select>
-				{errors.priority && (
-					<p className='text-danger'>{errors.priority.message}</p>
-				)}
-			</div>
+				<div className='mb-3'>
+					<label htmlFor='priority' className='form-label'>
+						Priority
+					</label>
+					<select
+						{...register('priority')}
+						id='priority'
+						className='form-select'
+					>
+						<option value=''></option>
+						{priorities.map((priority) => (
+							<option key={priority} value={priority}>
+								{priority}
+							</option>
+						))}
+					</select>
+					{errors.priority && (
+						<p className='text-danger'>{errors.priority.message}</p>
+					)}
+				</div>
 			</div>
 
 			<button disabled={!isValid} className='btn btn-primary' type='submit'>
