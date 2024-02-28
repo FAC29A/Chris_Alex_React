@@ -48,4 +48,4 @@ function editTask(id) {
 	return edit_Task.get(id)
 }
 
-export default { createTask, getTasks, deleteTask, editTask }
+export { createTask, getTasks, deleteTask, editTask }

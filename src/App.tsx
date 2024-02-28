@@ -1,5 +1,4 @@
-
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import MyForm from './components/MyForm'
 import TaskList from './components/TaskList'
@@ -7,10 +6,12 @@ import GenericFilter from './components/GenericFilter'
 import categories from './components/categories'
 import priorities from './components/priorities'
 import { Task } from './components/TaskList'
-import { createTask, getTasks, deleteTask, editTask } from '../model/tasksFunctions'
-
-
-
+// import {
+// 	createTask,
+// 	getTasks,
+// 	deleteTask,
+// 	editTask,
+// } from '../model/tasksFunctions'
 
 function App() {
 	const [tasks, setTasks] = useState([
@@ -43,8 +44,7 @@ function App() {
 	const [selectedCategory, setSelectedCategory] = useState('')
 	const [selectedPriority, setSelectedPriority] = useState('')
 
-
-	//combining two ternary logics into a single function 
+	//combining two ternary logics into a single function
 	const visibleTasks = () => {
 		return tasks.filter((task) => {
 			const matchesCategory = selectedCategory
@@ -68,7 +68,7 @@ function App() {
 	}
 
 	const liveEdit = (searchId: number, description: string) => {
-		console.log(searchId, description);
+		console.log(searchId, description)
 	}
 
 	const sortBy = (sortField: keyof Task) => {
