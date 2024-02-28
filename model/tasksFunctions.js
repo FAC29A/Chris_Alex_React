@@ -10,6 +10,14 @@ function createTask(task) {
 	return create_task.get(task)
 }
 
+const get_Task_By_Id = db.prepare(/*sql*/ `
+    SELECT * FROM tasks WHERE id = ?
+`);
+
+function getTaskById(id) {
+    return get_Task_By_Id.get(id);
+}
+
 const get_All_Tasks = db.prepare(/*sql*/ `
     SELECT * FROM tasks
     `)
@@ -44,8 +52,18 @@ const edit_Task = db.prepare(/*sql*/ `
     finished
     `)
 
-function editTask(id) {
-	return edit_Task.get(id)
+function editTask(task) {
+	return edit_Task.get(task)
 }
 
-export { createTask, getTasks, deleteTask, editTask }
+function toggleFinished(id) {
+    const task = getTaskById(id);
+    if (task) {
+        const newFinishedValue = task.finished === 0 ? 1 : 0;
+        return editTask({ ...task, finished: newFinishedValue });
+    } else {
+        return null; // or throw an error
+    }
+}
+
+export { createTask, getTasks, deleteTask, editTask, toggleFinished, getTaskById }

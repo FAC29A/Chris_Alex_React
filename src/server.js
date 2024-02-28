@@ -1,22 +1,27 @@
 import express from 'express'
 import Database from 'better-sqlite3'
-import cors from 'cors' // Import CORS module
-//import db from '../database/db.js'
-import { getTasks } from '../model/tasksFunctions.js'
+import cors from 'cors'
+import { editTask, getTasks, toggleFinished } from '../model/tasksFunctions.js'
 
 const server = express()
 const port = 3001
 const host = '0.0.0.0'
 
 server.use(cors()) // Enable CORS for all routes
-// const db = new Database('./database/tasksdb.db')
 
 server.get('/gettasks', (req, res) => {
-	// const rows = db.prepare('SELECT * FROM tasks').all()
 	const rows = getTasks()
-	//reposnd with fetched data
-	console.log(rows)
 	res.json(rows)
+})
+
+server.post('/togglefinished/:id', (req, res) => {
+	const id = parseInt(req.params.id, 10)
+	const updatedTask = toggleFinished(id)
+	if (updatedTask) {
+		res.json(updatedTask)
+	} else {
+		res.status(404).json({ error: 'Task not found' })
+	}
 })
 
 server.listen(port, host, () => {
