@@ -6,40 +6,9 @@ import GenericFilter from './components/GenericFilter'
 import categories from './components/categories'
 import priorities from './components/priorities'
 import { Task } from './components/TaskList'
-// import {
-// 	createTask,
-// 	getTasks,
-// 	deleteTask,
-// 	editTask,
-// } from '../model/tasksFunctions'
 
 function App() {
-	const [tasks, setTasks] = useState<any[]>([
-		// {
-		// 	id: 1,
-		// 	description: 'React',
-		// 	length: 60,
-		// 	category: 'Study',
-		// 	priority: '2: High',
-		// 	finished: false,
-		// },
-		// {
-		// 	id: 2,
-		// 	description: 'Work a bit',
-		// 	length: 60,
-		// 	category: 'Work',
-		// 	priority: '4: Low',
-		// 	finished: false,
-		// },
-		// {
-		// 	id: 3,
-		// 	description: 'Walk the dog',
-		// 	length: 120,
-		// 	category: 'Extra',
-		// 	priority: '3: Medium',
-		// 	finished: false,
-		// },
-	])
+	const [tasks, setTasks] = useState<any[]>([])
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -48,8 +17,8 @@ function App() {
 				if (!response.ok) {
 					throw new Error('Failed to fetch data')
 				}
-		
-				const jsonData = await response.json(); 
+
+				const jsonData = await response.json()
 				setTasks(jsonData)
 			} catch (error) {
 				console.error('Error fetching data:', error)
@@ -74,14 +43,31 @@ function App() {
 		})
 	}
 
-	const toggleFinished = (id: number) => {
-		const updatedTasks = tasks.map((task) => {
-			if (task.id === id) {
-				return { ...task, finished: !task.finished }
+	const toggleFinished = async (id: number) => {
+		try {
+			// Send a POST request to the server to toggle the finished status
+			const response = await fetch(
+				`http://localhost:3001/togglefinished/${id}`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			)
+
+			if (!response.ok) {
+				throw new Error('Failed to toggle task status')
 			}
-			return task
-		})
-		setTasks(updatedTasks)
+
+			// Wait for the server to send back the updated task
+			const updatedTask = await response.json()
+
+			// Update the tasks state with the updated task
+			setTasks(tasks.map((task) => (task.id === id ? updatedTask : task)))
+		} catch (error) {
+			console.error('Error toggling task status:', error)
+		}
 	}
 
 	const liveEdit = (searchId: number, description: string) => {
