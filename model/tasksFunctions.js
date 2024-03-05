@@ -31,7 +31,7 @@ const delete_Task = db.prepare(/*sql*/ `
     `)
 
 function deleteTask(id) {
-	delete_Tasks.run(id)
+	delete_Task.run(id)
 }
 
 const edit_Task = db.prepare(/*sql*/ `
