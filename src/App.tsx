@@ -6,6 +6,7 @@ import GenericFilter from './components/GenericFilter'
 import categories from './components/categories'
 import priorities from './components/priorities'
 import { Task } from './components/TaskList'
+//import { GiConsoleController } from 'react-icons/gi'
 
 function App() {
 	const [tasks, setTasks] = useState<any[]>([])
@@ -30,9 +31,8 @@ function App() {
 	const [selectedCategory, setSelectedCategory] = useState('')
 	const [selectedPriority, setSelectedPriority] = useState('')
 
-	//combining two ternary logics into a single function
 	const visibleTasks = () => {
-		return tasks.filter((task) => {
+		const filteredTasks = tasks.filter((task) => {
 			const matchesCategory = selectedCategory
 				? task.category === selectedCategory
 				: true
@@ -41,6 +41,8 @@ function App() {
 				: true
 			return matchesCategory && matchesPriority
 		})
+		//console.log('Filtered tasks:', filteredTasks)
+		return filteredTasks
 	}
 
 	const toggleFinished = async (id: number) => {
@@ -67,6 +69,24 @@ function App() {
 			setTasks(tasks.map((task) => (task.id === id ? updatedTask : task)))
 		} catch (error) {
 			console.error('Error toggling task status:', error)
+		}
+	}
+
+	const deleteTask = async (id: number) => {
+		try {
+			const response = await fetch(`http://localhost:3001/deletetask/${id}`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			})
+
+			if (!response.ok) {
+				throw new Error('Failed to delete task')
+			}
+			setTasks(tasks.filter((task) => task.id !== id))
+		} catch (error) {
+			console.error('Error deleting task:', error)
 		}
 	}
 
@@ -130,7 +150,7 @@ function App() {
 			<TaskList
 				tasks={visibleTasks()}
 				onEdit={(id, description) => liveEdit(id, description)}
-				onDelete={(id) => setTasks(tasks.filter((e) => e.id !== id))}
+				onDelete={(id) => deleteTask(id)}
 				onFinished={(id) => toggleFinished(id)}
 				sortBy={(sortField) => sortBy(sortField as keyof Task)}
 			></TaskList>
