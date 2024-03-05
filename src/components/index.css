@@ -2,10 +2,10 @@ body {
 	padding: 20px;
 	max-width: min(60rem, 80%);
 	margin-left: auto;
-	margin-right: auto; 
-	background-image: url('../../public/background2.webp');
+	margin-right: auto;
+	background-image: url('/background2.webp');
 	background-repeat: repeat;
-	background-size:cover ;
+	background-size: cover;
 }
 .flexContainer {
 	display: flex;

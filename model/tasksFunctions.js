@@ -12,10 +12,10 @@ function createTask(task) {
 
 const get_Task_By_Id = db.prepare(/*sql*/ `
     SELECT * FROM tasks WHERE id = ?
-`);
+`)
 
 function getTaskById(id) {
-    return get_Task_By_Id.get(id);
+	return get_Task_By_Id.get(id)
 }
 
 const get_All_Tasks = db.prepare(/*sql*/ `
@@ -31,7 +31,8 @@ const delete_Task = db.prepare(/*sql*/ `
     `)
 
 function deleteTask(id) {
-	delete_Task.run(id)
+	const info = delete_Task.run(id)
+	return info
 }
 
 const edit_Task = db.prepare(/*sql*/ `
@@ -57,13 +58,20 @@ function editTask(task) {
 }
 
 function toggleFinished(id) {
-    const task = getTaskById(id);
-    if (task) {
-        const newFinishedValue = task.finished === 0 ? 1 : 0;
-        return editTask({ ...task, finished: newFinishedValue });
-    } else {
-        return null; // or throw an error
-    }
+	const task = getTaskById(id)
+	if (task) {
+		const newFinishedValue = task.finished === 0 ? 1 : 0
+		return editTask({ ...task, finished: newFinishedValue })
+	} else {
+		return null // or throw an error
+	}
 }
 
-export { createTask, getTasks, deleteTask, editTask, toggleFinished, getTaskById }
+export {
+	createTask,
+	getTasks,
+	deleteTask,
+	editTask,
+	toggleFinished,
+	getTaskById,
+}
