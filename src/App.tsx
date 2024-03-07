@@ -26,7 +26,7 @@ function App() {
 			}
 		}
 		fetchData()
-	}, [])
+	}, [tasks])
 
 	const [selectedCategory, setSelectedCategory] = useState('')
 	const [selectedPriority, setSelectedPriority] = useState('')
@@ -84,7 +84,7 @@ function App() {
 			if (!response.ok) {
 				throw new Error('Failed to delete task')
 			}
-			setTasks(tasks.filter((task) => task.id !== id))
+			//setTasks(tasks.filter((task) => task.id !== id))
 		} catch (error) {
 			console.error('Error deleting task:', error)
 		}
