@@ -1,10 +1,15 @@
 import express from 'express'
 import cors from 'cors'
+import cookieParser from "cookie-parser"
 import {
 	deleteTask,
 	getTasks,
 	toggleFinished,
 } from '../model/tasksFunctions.js'
+import {get} from "../routes/sign-up.js"
+
+const body = express.urlencoded({ extended: false });
+const cookies = cookieParser(process.env.COOKIE_SECRET);
 
 const server = express()
 const port = 3001
@@ -45,6 +50,9 @@ server.post('/deletetask/:id', (req, res) => {
 			.json({ message: 'Internal Server Error', error: error.message })
 	}
 })
+
+server.use(cookies);
+server.get("/sign-up", get);
 
 server.listen(port, host, () => {
 	console.log(`listening at port: ${port}`)
