@@ -30,6 +30,7 @@ function App() {
 
 	const [selectedCategory, setSelectedCategory] = useState('')
 	const [selectedPriority, setSelectedPriority] = useState('')
+	const [signedIn, setSignedIn] = useState<boolean>(false);
 
 	const visibleTasks = () => {
 		const filteredTasks = tasks.filter((task) => {
@@ -116,9 +117,47 @@ function App() {
 		setTasks(sortedTasks)
 	}
 
+	const btnAction = () => {
+		setSignedIn(!signedIn);
+	}
+
+	const submitUsernameandPassword = async (event: any) => {
+		event.preventDefault();
+		try {
+			const response = await fetch("/sign-up", {
+				method: "POST",
+				body: JSON.stringify(event.target),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				  },
+			});
+			if(response.ok) {
+				const data = await response.json();
+				console.log(data);
+			}; 
+			} catch(error) {
+			console.error("Error:", error);
+		}
+	}
+
 	return (
-		<>
-			<div className='mb-5'>
+		<>	
+			{!signedIn && (
+			<>
+			<div>
+      		<h1>Sign Up</h1>
+      		<form onClick={submitUsernameandPassword}>	
+          	<input type="email" id="email" name="email" placeholder="User Name" required />
+          	<input type="password" id="password" name="password" placeholder="Password" required/>
+        	<button>Sign up</button>
+      		</form>
+    		</div>
+			</>
+			)};
+
+			{signedIn && (
+				<>
+				<div className='mb-5'>
 				<h2 className='mb-3 white'>Create task</h2>
 				<MyForm
 					onSubmit={(task) =>
@@ -154,6 +193,9 @@ function App() {
 				onFinished={(id) => toggleFinished(id)}
 				sortBy={(sortField) => sortBy(sortField as keyof Task)}
 			></TaskList>
+			</>
+			)}
+			
 		</>
 	)
 }

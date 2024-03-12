@@ -6,14 +6,17 @@ import {
 	getTasks,
 	toggleFinished,
 } from '../model/tasksFunctions.js'
-import {get} from "../routes/sign-up.js"
-
-const body = express.urlencoded({ extended: false });
-const cookies = cookieParser(process.env.COOKIE_SECRET);
+import { get } from "../routes/sign-up.js"
+import bodyParser from 'body-parser'
 
 const server = express()
 const port = 3001
 const host = '0.0.0.0'
+
+const body = express.urlencoded({ extended: false });
+const cookies = cookieParser(process.env.COOKIE_SECRET);
+
+// server.use(bodyParser.urlencoded({ extended: true }));
 
 server.use(cors()) // Enable CORS for all routes
 
@@ -52,7 +55,13 @@ server.post('/deletetask/:id', (req, res) => {
 })
 
 server.use(cookies);
-server.get("/sign-up", get);
+
+server.post('/sign-up', (req, res) => {
+    const { email, password } = req.body;
+    // Process the data (e.g., save to a database)
+    console.log('Received data:', { email, password });
+    res.send('Data received successfully!');
+});
 
 server.listen(port, host, () => {
 	console.log(`listening at port: ${port}`)
